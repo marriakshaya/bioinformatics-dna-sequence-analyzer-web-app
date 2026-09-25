@@ -12,6 +12,10 @@ The application provides nucleotide composition analysis, DNA sequence transform
 
 ---
 
+## 🌐 Live Demo
+
+🚀 **[Open Bioinformatics DNA Sequence Analyzer App](https://bioinformatics-dna-sequence-analyzer-web-app-nxpx7lnrywevjedpf.streamlit.app/)**
+
 ## ✨ Features
 
 ### 📊 Basic DNA Analysis
