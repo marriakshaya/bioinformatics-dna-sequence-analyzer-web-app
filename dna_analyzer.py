@@ -4,18 +4,52 @@ import streamlit as st
 # PAGE CONFIGURATION
 # ============================================================
 st.set_page_config(
-    page_title="DNAInsight",
+    page_title="Bioinformatics DNA Sequence Analyzer",
     page_icon="🧬",
     layout="wide"
 )
 
+
+# ============================================================
+# CUSTOM CSS - BIOINFORMATICS THEME
+# ============================================================
+st.markdown("""
+<style>
+.stApp { background: radial-gradient(circle at 10% 10%, rgba(14,165,233,.10), transparent 28%), radial-gradient(circle at 90% 15%, rgba(20,184,166,.10), transparent 28%), linear-gradient(135deg,#f0f9ff 0%,#ecfeff 50%,#f8fafc 100%); }
+.block-container { padding-top:2rem; padding-bottom:3rem; max-width:1200px; }
+.bio-header { background:linear-gradient(135deg,#075985,#0f766e); padding:30px 35px; border-radius:22px; text-align:center; margin-bottom:25px; box-shadow:0 10px 30px rgba(15,118,110,.20); }
+.bio-header h1 { color:white !important; font-size:42px; font-weight:800; margin:0 0 10px 0; }
+.bio-header p { color:#e0f2fe; font-size:18px; margin:0; }
+h1,h2,h3 { color:#075985 !important; }
+.stTextArea textarea { border:2px solid #bae6fd !important; border-radius:14px !important; background-color:rgba(255,255,255,.90) !important; font-family:monospace !important; font-size:16px !important; }
+.stTextArea textarea:focus { border-color:#0f766e !important; box-shadow:0 0 0 2px rgba(15,118,110,.12) !important; }
+.stButton > button { border-radius:12px; border:none; font-weight:700; padding:.65rem 1.4rem; transition:all .2s ease; }
+.stButton > button[kind="primary"] { background:linear-gradient(135deg,#0284c7,#0f766e); color:white; box-shadow:0 5px 15px rgba(2,132,199,.25); }
+.stButton > button:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(2,132,199,.30); }
+[data-testid="stMetric"] { background:rgba(255,255,255,.88); border:1px solid #bae6fd; border-radius:16px; padding:15px; box-shadow:0 5px 15px rgba(15,23,42,.06); }
+.stTabs [data-baseweb="tab-list"] { gap:6px; background:rgba(255,255,255,.70); padding:8px; border-radius:14px; }
+.stTabs [data-baseweb="tab"] { border-radius:10px; padding:10px 14px; font-weight:600; }
+.stTabs [aria-selected="true"] { background:linear-gradient(135deg,#e0f2fe,#ccfbf1); color:#075985 !important; }
+.stCodeBlock { border-radius:12px !important; border:1px solid #bae6fd !important; }
+.stAlert { border-radius:12px !important; }
+.stDownloadButton > button { width:100%; border-radius:12px; background:linear-gradient(135deg,#0f766e,#0284c7); color:white; font-weight:700; border:none; }
+.stDownloadButton > button:hover { transform:translateY(-2px); }
+hr { border-color:rgba(14,116,144,.18) !important; }
+label { font-weight:600 !important; color:#164e63 !important; }
+</style>
+""", unsafe_allow_html=True)
+
 # ============================================================
 # APP TITLE
 # ============================================================
-st.title("🧬 DNAInsight")
-st.write(
-    "An interactive bioinformatics tool for DNA sequence analysis, "
-    "transcription, codon analysis, and sequence transformation."
+st.markdown(
+    """
+    <div class="bio-header">
+        <h1>🧬 Bioinformatics DNA Sequence Analyzer</h1>
+        <p>An interactive web tool for DNA sequence analysis, transformation, transcription and visualization.</p>
+    </div>
+    """,
+    unsafe_allow_html=True
 )
 
 st.divider()
@@ -23,6 +57,8 @@ st.divider()
 # ============================================================
 # INPUT SECTION
 # ============================================================
+st.subheader("🧬 DNA Sequence Input")
+
 dna_input = st.text_area(
     "Enter DNA Sequence:",
     value="AATTCCGTA",
@@ -36,6 +72,8 @@ dna = "".join(dna_input.upper().split())
 # ============================================================
 # ANALYZE BUTTON
 # ============================================================
+st.caption("Enter a DNA sequence containing only A, T, C, and G, then run the analysis.")
+
 analyze = st.button(
     "🔬 Analyze DNA Sequence",
     type="primary"
