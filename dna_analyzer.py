@@ -61,9 +61,8 @@ st.subheader("🧬 DNA Sequence Input")
 
 dna_input = st.text_area(
     "Enter DNA Sequence:",
-    value="AATTCCGTA",
-    height=120,
-    placeholder="Example: ATGCGTACCGTAA"
+    value="ATGCCATCGATCGATCGATATTCCCTACCCCATATCCGCCTGA",
+    height=120
 )
 
 # Clean sequence
