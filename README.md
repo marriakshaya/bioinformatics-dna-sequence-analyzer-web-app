@@ -1,4 +1,4 @@
-# 🧬 Bioinformatics DNA Sequence Analyzer Web App
+# 🧬 Bioinformatics DNA Sequence Analyzer 
 
 An interactive **Streamlit-based web application** for DNA sequence analysis using Python and basic bioinformatics concepts.
 
