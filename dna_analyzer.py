@@ -232,62 +232,68 @@ if analyze:
 
             st.header("🔤 Start & Stop Codon Analysis")
 
-            if length < 6:
+            if length < 3:
 
                 st.warning(
-                    "Please enter a DNA sequence with at least 6 bases "
-                    "for start and stop codon analysis."
+                    "Please enter a DNA sequence with at least 3 bases "
+                    "for codon analysis."
                 )
 
             else:
 
-                start_codon = dna[:3]
-                stop_codon = dna[-3:]
-
-                col1, col2 = st.columns(2)
-
-                with col1:
-                    st.metric(
-                        "Start Codon",
-                        start_codon
-                    )
-
-                with col2:
-                    st.metric(
-                        "Stop Codon",
-                        stop_codon
-                    )
-
-                st.divider()
+                # Find the first start codon (ATG)
+                start_index = dna.find("ATG")
 
                 st.subheader("▶ Start Codon")
 
-                if start_codon == "ATG":
+                if start_index != -1:
 
                     st.success(
-                        "✅ Valid start codon detected: ATG"
+                        f"✅ Valid start codon detected: ATG "
+                        f"(position {start_index + 1})"
                     )
+
+                    st.subheader("⏹ Stop Codon")
+
+                    # Search for the first in-frame stop codon after ATG
+                    stop_codon = None
+                    stop_index = None
+
+                    for i in range(start_index + 3, len(dna) - 2, 3):
+
+                        codon = dna[i:i+3]
+
+                        if codon in ["TAA", "TAG", "TGA"]:
+
+                            stop_codon = codon
+                            stop_index = i
+                            break
+
+                    if stop_codon:
+
+                        st.success(
+                            f"✅ Valid stop codon detected: {stop_codon} "
+                            f"(position {stop_index + 1})"
+                        )
+
+                        # Show the identified coding region
+                        coding_region = dna[start_index:stop_index + 3]
+
+                        st.info(
+                            f"🧬 Coding region: {coding_region}"
+                        )
+
+                    else:
+
+                        st.warning(
+                            "⚠️ No in-frame stop codon detected after "
+                            "the start codon."
+                        )
 
                 else:
 
                     st.warning(
-                        f"⚠️ No valid start codon detected. "
-                        f"The sequence starts with {start_codon}."
-                    )
-
-                st.subheader("⏹ Stop Codon")
-
-                if stop_codon in ["TAA", "TAG", "TGA"]:
-
-                    st.success(
-                        f"✅ Valid stop codon detected: {stop_codon}"
-                    )
-
-                else:
-
-                    st.warning(
-                        f"⚠️ No valid stop codon detected. "
-                        f"The sequence ends with {stop_codon}."
+                        "⚠️ No valid start codon (ATG) detected."
                     )
 
                 st.divider()
